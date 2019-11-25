@@ -1,0 +1,16 @@
+CREATE DATABASE snow;
+
+CREATE TABLE polygon(
+	polygon_id SERIAL PRIMARY KEY, 
+	address CHAR(30) NOT NULL,
+	num_marks INT NOT NULL);
+
+CREATE TABLE comments(
+	comm_id SERIAL PRIMARY KEY,
+	polygon_id INT REFERENCES polygon(polygon_id),
+	comment TEXT NOT NULL,
+	photo_path TEXT);
+
+INSERT INTO polygon(address, num_marks) VALUES ('Улица Самойлова',1),('Проспект Ленина',2),('Улица Дзержинского',0),('Улица Дзержинского',7),('Улица Дзержинского',0),('Улица Дзержинского',0),('Проспект Ленина',18),('Улица Дзержинского',17),('Улица Комуны',10),('Улица Комуны',0),('Улица Комуны',0),('Улица Комуны',0),('Улица Егорова',0),('Улица Буркова',2),('Улица Буркова',2),('Улица Буркова',4);
+
+CREATE TABLE photos (photo_id SERIAL PRIMARY KEY, polygon_id INT REFERENCES polygon(polygon_id), photo_path CHAR(50));
